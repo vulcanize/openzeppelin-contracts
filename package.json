@@ -28,6 +28,8 @@
     "release": "scripts/release/release.sh",
     "version": "scripts/release/version.sh",
     "test": "hardhat test",
+		"erc1155:create": "hardhat --network localhost erc1155-create",
+		"erc1155:create:docker": "hardhat --network docker erc1155-create",
     "test:inheritance": "node scripts/inheritanceOrdering artifacts/build-info/*",
     "gas-report": "env ENABLE_GAS_REPORT=true npm run test"
   },

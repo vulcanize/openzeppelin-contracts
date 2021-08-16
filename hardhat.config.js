@@ -52,16 +52,19 @@ module.exports = {
     version: argv.compiler,
     settings: {
       optimizer: {
-        enabled: withOptimizations,
+        enabled: true,
         runs: 200,
       },
     },
+		metadata: {
+			bytecodeHash: 'none'
+		}
   },
   networks: {
     hardhat: {
       hardfork: process.env.COVERAGE ? 'berlin' : 'london',
       blockGasLimit: 10000000,
-      allowUnlimitedContractSize: !withOptimizations,
+      allowUnlimitedContractSize: true,
     },
   },
   gasReporter: {
