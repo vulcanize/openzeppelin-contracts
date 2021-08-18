@@ -90,9 +90,9 @@ task("erc1155-create", "Create an ERC-1155")
 
 		const ERC1155 = await hre.ethers.getContractFactory("ERC1155VulcanizeTest");
 
-		const THING = await ERC1155.deploy(uri);
+		const instance = await ERC1155.deploy(uri);
 
-    const tx = await THING.init();
+    const tx = await instance.init();
 
     const receipt = await tx.wait();
 
