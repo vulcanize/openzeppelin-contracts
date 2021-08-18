@@ -69,6 +69,9 @@ module.exports = {
 		}
   },
   networks: {
+    docker: {
+      url: `http://dapptools:8545`,
+    },
     hardhat: {
       hardfork: process.env.COVERAGE ? 'berlin' : 'london',
       blockGasLimit: 10000000,
