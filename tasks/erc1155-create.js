@@ -14,7 +14,7 @@ task("erc1155-create", "Create an ERC-1155")
 		console.log("deployed ERC1155 to: ", erc1155Instance.address);
 
 		if (receipt.events) {
-			receipt.events.forEach(event => console.log(event.event, event.args)
+			receipt.events.forEach(event => console.log(event.event, event.args));
 		}
 
 	});

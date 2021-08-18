@@ -3,7 +3,10 @@
 // - CI
 // - COMPILE_MODE
 
+
+
 const fs = require('fs');
+const { task } = require('hardhat/config');
 const path = require('path');
 const argv = require('yargs/yargs')()
   .env('')
@@ -77,3 +80,24 @@ module.exports = {
     outputFile: argv.ci ? 'gas-report.txt' : undefined,
   },
 };
+
+require('@nomiclabs/hardhat-ethers');
+
+task("erc1155-create", "Create an ERC-1155")
+	.addParam('uri', 'the URI for this 1155')
+	.setAction(async (args, hre) => {
+		const { uri } = args 
+
+		const ERC1155 = await hre.ethers.getContractFactory("ERC1155VulcanizeTest");
+
+		const THING = await ERC1155.deploy(uri);
+
+    const tx = await THING.init();
+
+    const receipt = await tx.wait();
+
+		if (receipt.events) {
+			receipt.events.forEach(event => console.log(event.event, event.args));
+		}
+
+	});
