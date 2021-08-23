@@ -95,6 +95,8 @@ task("erc1155-create", "Create an ERC-1155")
 
 		const instance = await ERC1155.deploy(uri);
 
+    console.log("deployed erc1155 token to: ", instance.address);
+
     const tx = await instance.init();
 
     const receipt = await tx.wait();
