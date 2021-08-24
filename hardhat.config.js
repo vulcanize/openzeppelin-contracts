@@ -97,12 +97,29 @@ task("erc1155-create", "Create an ERC-1155")
 
     console.log("deployed erc1155 token to: ", instance.address);
 
+	});
+
+task("erc1155-init", "Mint tokens to user")
+  .addParam('address', 'the address of the ERC1155')
+  .setAction(async (args, hre) => {
+    const { address } = args
+
+    const ERC1155 = await hre.ethers.getContractFactory("ERC1155VulcanizeTest");
+
+    const instance = await ERC1155.attach(address);
+
     const tx = await instance.init();
 
     const receipt = await tx.wait();
 
-		if (receipt.events) {
-			receipt.events.forEach(event => console.log(event.event, event.args));
-		}
+    if (receipt.events) {
 
-	});
+			receipt.events.forEach(event => {
+
+        console.log(event.event, event.args)
+
+      });
+
+    }
+
+  })

@@ -30,6 +30,8 @@
     "test": "hardhat test",
     "erc1155:create": "hardhat --network localhost erc1155-create",
     "erc1155:create:docker": "hardhat --network docker erc1155-create",
+    "erc1155:init": "hardhat --network localhost erc1155-init",
+    "erc1155:init:docker": "hardhat --network docker erc1155-init",
     "test:inheritance": "node scripts/inheritanceOrdering artifacts/build-info/*",
     "gas-report": "env ENABLE_GAS_REPORT=true npm run test"
   },
