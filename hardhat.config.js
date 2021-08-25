@@ -129,6 +129,8 @@ task("erc1155-helper-init", "Mint tokens to user via helper")
 
         receipt.events.forEach(event => {
 
+          console.log("event", event)
+
           console.log(event.event, event.args)
 
         });
