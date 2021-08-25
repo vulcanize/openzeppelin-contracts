@@ -109,11 +109,11 @@ task("erc20-create", "Create an ERC-20")
 
 		const instance = await ERC1155.deploy(name, symbol);
 
-    console.log("deployed erc1155 token to: ", instance.address);
+    console.log("deployed erc20 token to: ", instance.address);
 
 	});
 
-task("helper", "Deploy helper")
+task("helper-create", "Deploy helper")
   .addParam('erc1155', 'the address of the ERC1155')
   .addParam('erc20', 'the address of the ERC1155')
   .setAction(async (args, hre) => {
@@ -142,15 +142,12 @@ task("helper-init-erc20", "Mint tokens to user via helper")
 
       if (receipt.events) {
 
-        receipt.events.forEach(event => {
-
-          console.log("event", event)
-
-          console.log(event.event, event.args)
-
-        });
+        receipt.events.forEach(event => console.log(event) );
 
       }
+
+      console.log("blockHash from init erc20:", receipt.blockHash)
+
   })
 
 task("helper-init-erc1155", "Mint tokens to user via helper")
