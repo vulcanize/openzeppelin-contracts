@@ -99,6 +99,43 @@ task("erc1155-create", "Create an ERC-1155")
 
 	});
 
+task("erc1155-helper", "Deploy helper")
+  .addParam('address', 'the address of the ERC1155')
+  .setAction(async (args, hre) => {
+    const { address } = args;
+
+    const Helper = await hre.ethers.getContractFactory("ERC1155VulcanizeHeler");
+
+    const instance = await Helper.deploy(address);
+
+    console.log("deployed erc1155 helper to:", instance.address);
+
+  });
+
+task("erc1155-helper-init", "Mint tokens to user via helper")
+  .addParam('address', 'the address of the helper')
+  .setAction(async (args, hre) => {
+      const { address } = args;
+
+      const Helper = await hre.ethers.getContractFactory("ERC1155VulcanizeHeler");
+
+      const instance = await Helper.attach(address);
+
+      const tx = await instance.init();
+
+      const receipt = await tx.wait();
+
+      if (receipt.events) {
+
+        receipt.events.forEach(event => {
+
+          console.log(event.event, event.args)
+
+        });
+
+      }
+  })
+
 task("erc1155-init", "Mint tokens to user")
   .addParam('address', 'the address of the ERC1155')
   .setAction(async (args, hre) => {
