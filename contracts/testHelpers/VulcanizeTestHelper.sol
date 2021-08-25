@@ -13,7 +13,7 @@ interface IERC1155VulcanizeTest {
 	function init () external;
 }
 
-contract VulcanizeHelper is ERC1155Receiver {
+contract VulcanizeTestHelper is ERC1155Receiver {
 
 	IERC1155VulcanizeTest public erc1155;
 	IERC20VulcanizeTest public erc20;
