@@ -99,29 +99,70 @@ task("erc1155-create", "Create an ERC-1155")
 
 	});
 
-task("erc1155-helper", "Deploy helper")
-  .addParam('address', 'the address of the ERC1155')
+task("erc20-create", "Create an ERC-20")
+	.addParam('name', 'the erc20 name')
+	.addParam('symbol', 'the erc20 symbol')
+	.setAction(async (args, hre) => {
+		const { name, symbol } = args 
+
+		const ERC1155 = await hre.ethers.getContractFactory("ERC20VulcanizeTest");
+
+		const instance = await ERC1155.deploy(name, symbol);
+
+    console.log("deployed erc1155 token to: ", instance.address);
+
+	});
+
+task("helper", "Deploy helper")
+  .addParam('erc1155', 'the address of the ERC1155')
+  .addParam('erc20', 'the address of the ERC1155')
   .setAction(async (args, hre) => {
-    const { address } = args;
+    const { erc1155, erc20 } = args;
 
-    const Helper = await hre.ethers.getContractFactory("ERC1155VulcanizeHelper");
+    const Helper = await hre.ethers.getContractFactory("VulcanizeTestHelper");
 
-    const instance = await Helper.deploy(address);
+    const instance = await Helper.deploy(erc20, erc1155);
 
-    console.log("deployed erc1155 helper to:", instance.address);
+    console.log("deployed helper to:", instance.address);
 
   });
 
-task("erc1155-helper-init", "Mint tokens to user via helper")
+task("helper-init-erc20", "Mint tokens to user via helper")
   .addParam('address', 'the address of the helper')
   .setAction(async (args, hre) => {
       const { address } = args;
 
-      const Helper = await hre.ethers.getContractFactory("ERC1155VulcanizeHelper");
+      const Helper = await hre.ethers.getContractFactory("VulcanizeTestHelper");
 
       const instance = await Helper.attach(address);
 
-      const tx = await instance.init();
+      const tx = await instance.init20();
+
+      const receipt = await tx.wait();
+
+      if (receipt.events) {
+
+        receipt.events.forEach(event => {
+
+          console.log("event", event)
+
+          console.log(event.event, event.args)
+
+        });
+
+      }
+  })
+
+task("helper-init-erc1155", "Mint tokens to user via helper")
+  .addParam('address', 'the address of the helper')
+  .setAction(async (args, hre) => {
+      const { address } = args;
+
+      const Helper = await hre.ethers.getContractFactory("VulcanizeTestHelper");
+
+      const instance = await Helper.attach(address);
+
+      const tx = await instance.init1155();
 
       const receipt = await tx.wait();
 
