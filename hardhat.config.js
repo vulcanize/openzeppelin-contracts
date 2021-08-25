@@ -104,7 +104,7 @@ task("erc1155-helper", "Deploy helper")
   .setAction(async (args, hre) => {
     const { address } = args;
 
-    const Helper = await hre.ethers.getContractFactory("ERC1155VulcanizeHeler");
+    const Helper = await hre.ethers.getContractFactory("ERC1155VulcanizeHelper");
 
     const instance = await Helper.deploy(address);
 
@@ -117,7 +117,7 @@ task("erc1155-helper-init", "Mint tokens to user via helper")
   .setAction(async (args, hre) => {
       const { address } = args;
 
-      const Helper = await hre.ethers.getContractFactory("ERC1155VulcanizeHeler");
+      const Helper = await hre.ethers.getContractFactory("ERC1155VulcanizeHelper");
 
       const instance = await Helper.attach(address);
 
