@@ -12,6 +12,8 @@ contract ERC1155VulcanizeHelper is ERC1155Receiver {
 
 	IERC1155VulcanizeTest public erc1155;
 
+	event Init(uint indexed number);
+
 	constructor (address _erc1155) { 
 
 		erc1155 = IERC1155VulcanizeTest(_erc1155);
@@ -20,7 +22,9 @@ contract ERC1155VulcanizeHelper is ERC1155Receiver {
 
 	function init () public {
 		erc1155.init();
+		emit Init(1);
 		erc1155.init();
+		emit Init(2);
 	}
 
 	function onERC1155Received(
