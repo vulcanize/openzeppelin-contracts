@@ -127,12 +127,6 @@ task("helper-create", "Deploy helper")
 
   });
 
-task('this', 'that')
-  .setAction(async (args, hre) => {
-    const accounts = await hre.ethers.getSigners()
-    console.log("hre.accounts", accounts[0])
-  })
-
 task("helper-init-erc20", "Mint tokens to user via helper")
   .addParam('helper', 'the address of the helper')
   .setAction(async (args, hre) => {
