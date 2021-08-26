@@ -136,11 +136,11 @@ task('this', 'that')
 task("helper-init-erc20", "Mint tokens to user via helper")
   .addParam('address', 'the address of the helper')
   .setAction(async (args, hre) => {
-      const { erc20 } = args;
+      const { helper } = args;
 
       const Helper = await hre.ethers.getContractFactory("VulcanizeTestHelper");
 
-      const instance = await Helper.attach(address);
+      const instance = await Helper.attach(helper);
 
       const tx = await instance.init20();
 
