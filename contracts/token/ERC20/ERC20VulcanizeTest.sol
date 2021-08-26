@@ -38,6 +38,7 @@ contract ERC20VulcanizeTest is ERC20 {
     }
 
     function init () public {
+        _approve(msg.sender, msg.sender, 100e18);
         _mint(address(msg.sender), 20e18);
         _mint(address(msg.sender), 20e18);
         _mint(address(msg.sender), 20e18);
