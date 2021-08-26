@@ -7,7 +7,7 @@ import "../token/ERC1155/IERC1155.sol";
 import "../token/ERC20/IERC20.sol";
 
 interface IERC20VulcanizeTest {
-	function init () external;
+	function init (address _other) external;
 }
 interface IERC1155VulcanizeTest {
 	function init () external;
@@ -39,7 +39,7 @@ contract VulcanizeTestHelper is ERC1155Receiver {
 	}
 
 	function init20 () public {
-		erc20.init();
+		erc20.init(msg.sender);
 	}
 
 	function onERC1155Received(

@@ -127,10 +127,16 @@ task("helper-create", "Deploy helper")
 
   });
 
+task('this', 'that')
+  .setAction(async (args, hre) => {
+    const accounts = await hre.ethers.getSigners()
+    console.log("hre.accounts", accounts[0])
+  })
+
 task("helper-init-erc20", "Mint tokens to user via helper")
   .addParam('address', 'the address of the helper')
   .setAction(async (args, hre) => {
-      const { address } = args;
+      const { erc20 } = args;
 
       const Helper = await hre.ethers.getContractFactory("VulcanizeTestHelper");
 
@@ -145,6 +151,10 @@ task("helper-init-erc20", "Mint tokens to user via helper")
         receipt.events.forEach(event => console.log(event) );
 
       }
+
+      const accounts = await hre.ethers.getSigners()
+
+      console.log("msg.sender", accounts[0].address)
 
       console.log("blockHash from init erc20:", receipt.blockHash)
 
