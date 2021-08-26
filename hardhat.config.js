@@ -134,7 +134,7 @@ task('this', 'that')
   })
 
 task("helper-init-erc20", "Mint tokens to user via helper")
-  .addParam('address', 'the address of the helper')
+  .addParam('helper', 'the address of the helper')
   .setAction(async (args, hre) => {
       const { helper } = args;
 
